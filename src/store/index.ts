@@ -1,12 +1,16 @@
-import { createStore, createLogger } from 'vuex';
-import user from './modules/user';
+import { InjectionKey } from 'vue';
+import { createStore, createLogger, Store } from 'vuex';
+import { UserState, store as user } from './modules/user';
 import cart from './modules/cart';
 // 使用插件让在vuex中管理的状态数据自动同时存储在本地免去自己存储的环节
 import createPersistedstate from 'vuex-persistedstate';
-export default createStore({
-  state: {},
-  mutations: {},
-  actions: {},
+
+export const key: InjectionKey<Store<RootState>> = Symbol('vue-store');
+export interface RootState {
+  user: UserState;
+}
+// export type Store = AppStore<Pick<RootState, 'user'>>;
+export const store = createStore({
   modules: {
     user,
     cart
@@ -20,3 +24,4 @@ export default createStore({
     createLogger()
   ]
 });
+export default store;
