@@ -1,5 +1,5 @@
 // 用户状态
-import { MutationTree, Module } from 'vuex';
+import { MutationTree, Module, Store as VuexStore, CommitOptions } from 'vuex';
 import { RootState } from '../index';
 
 /* user子模块stateのinteface*/
@@ -20,6 +20,17 @@ export interface Mutations<S = UserState> {
   setUser(state: S, payload: any): void;
   setRedirectUrl(state: S, url: string): void;
 }
+
+export type UserStore<S = UserState> = Omit<
+  VuexStore<S>,
+  'getters' | 'commit' | 'dispatch'
+> & {
+  commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
+    key: K,
+    payload: P,
+    options?: CommitOptions
+  ): ReturnType<Mutations[K]>;
+};
 
 const state: UserState = {
   // 用户信息

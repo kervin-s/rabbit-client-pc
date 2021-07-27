@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from '@/store';
+import { store } from '@/store';
 import router from '@/router';
 
 // 备用地址:
@@ -47,17 +47,18 @@ instance.interceptors.response.use(
   }
 );
 
-// 请求工具函数
-/* export default (params: any): Promise<[Error | null, RequestRes?, any?]> => {
-  // 负责发请求：请求地址，请求方式，提交的数据
-  return instance({
-    url,
-    method,
-    // 1. 如果是get请求  需要使用params来传递submitData   ?a=10&c=10
-    // 2. 如果不是get请求  需要使用data来传递submitData   请求体传参
-    // [] 设置一个动态的key, 写js表达式，js表达式的执行结果当作KEY
-    // method参数：get,Get,GET  转换成小写再来判断
-    [method.toLowerCase() === 'get' ? 'params' : 'data']: submitData
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export default (param: any) => {
+  const { url, method, data } = param;
+  return new Promise((resolve, reject) => {
+    const res = instance({
+      url,
+      method,
+      [method.toLowerCase() === 'get' ? 'params' : 'data']: data
+    })
+      .then((res) => {
+        resolve(res);
+      })
+      .catch((e) => reject(e));
   });
 };
- */
