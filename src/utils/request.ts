@@ -28,37 +28,53 @@ instance.interceptors.request.use(
 
 // 响应拦截器
 instance.interceptors.response.use(
-  (res) => res.data,
+  (res) => Promise.resolve(res.data),
   (err) => {
-    // 401 状态码，进入该函数
-    if (err.response && err.response.status === 401) {
-      // 1. 清空无效用户信息
-      // 2. 跳转到登录页
-      // 3. 跳转需要传参（当前路由地址）给登录页码
-      store.commit('user/setUser', {});
-      // 当前路由地址
-      // 组件里头：`/user?a=10` $route.path === /user  $route.fullPath === /user?a=10
-      // js模块中：router.currentRoute.value.fullPath 就是当前路由地址，router.currentRoute 是ref响应式数据
-      const fullPath = encodeURIComponent(router.currentRoute.value.fullPath);
-      // encodeURIComponent 转换uri编码，防止解析地址出问题
-      router.push('/login?redirectUrl=' + fullPath);
-    }
     return Promise.reject(err);
   }
 );
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export default (param: any) => {
-  const { url, method, data } = param;
+/* 封装请求方法 */
+
+export type Method = 'get' | 'GET' | 'post' | 'POST';
+export interface AxiosRequestConfig {
+  url: string;
+  method?: Method;
+  params?: any;
+}
+
+export default (opts: AxiosRequestConfig): any => {
+  let { method = 'get', url, params = {} } = opts;
   return new Promise((resolve, reject) => {
-    const res = instance({
+    instance({
       url,
       method,
-      [method.toLowerCase() === 'get' ? 'params' : 'data']: data
+      // 1. 如果是get请求  需要使用params来传递submitData   ?a=10&c=10
+      // 2. 如果不是get请求  需要使用data来传递submitData   请求体传参
+      // [] 设置一个动态的key, 写js表达式，js表达式的执行结果当作KEY
+      // method参数：get,Get,GET  转换成小写再来判断
+      [method.toLowerCase() === 'get' ? 'params' : 'data']: params
     })
       .then((res) => {
         resolve(res);
       })
-      .catch((e) => reject(e));
+      .catch((err) => {
+        // 401 状态码，进入该函数
+        if (err.response && err.response.status === 401) {
+          // 1. 清空无效用户信息
+          // 2. 跳转到登录页
+          // 3. 跳转需要传参（当前路由地址）给登录页码
+          store.commit('user/setUser', {});
+          // 当前路由地址
+          // 组件里头：`/user?a=10` $route.path === /user  $route.fullPath === /user?a=10
+          // js模块中：router.currentRoute.value.fullPath 就是当前路由地址，router.currentRoute 是ref响应式数据
+          const fullPath = encodeURIComponent(
+            router.currentRoute.value.fullPath
+          );
+          // encodeURIComponent 转换uri编码，防止解析地址出问题
+          router.push('/login?redirectUrl=' + fullPath);
+        }
+        reject(err);
+      });
   });
 };

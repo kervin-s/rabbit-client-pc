@@ -5,12 +5,12 @@ import { RootState } from '../index';
 /* user子模块stateのinteface*/
 export interface UserState {
   profile: {
-    id: string;
-    avatar: string;
-    nickname: string;
-    account: string;
-    mobile: string;
-    token: string;
+    id?: string;
+    avatar?: string;
+    nickname?: string;
+    account?: string;
+    mobile?: string;
+    token?: string;
   };
   redirectUrl: string;
 }
@@ -32,18 +32,20 @@ export type UserStore<S = UserState> = Omit<
   ): ReturnType<Mutations[K]>;
 };
 
-const state: UserState = {
-  // 用户信息
-  profile: {
-    id: '',
-    avatar: '',
-    nickname: '',
-    account: '',
-    mobile: '',
-    token: ''
-  },
-  // 登录后回跳路径
-  redirectUrl: '/'
+const state = (): UserState => {
+  return {
+    // 用户信息
+    profile: {
+      id: '',
+      avatar: '',
+      nickname: '',
+      account: '',
+      mobile: '',
+      token: ''
+    },
+    // 登录后回跳路径
+    redirectUrl: '/'
+  };
 };
 const mutations: MutationTree<UserState> & Mutations = {
   // 修改用户信息，payload就是用户信息对象
@@ -58,7 +60,9 @@ const mutations: MutationTree<UserState> & Mutations = {
 
 // 用户模块
 export const store: Module<UserState, RootState> = {
-  namespaced: true,
+  /* TODO: With namespaced option turned on, having problem how to use dispatch with action types...
+   But without it, a bigger store might have clashes in namings*/
+  // namespaced: true,
   state,
   mutations
 };

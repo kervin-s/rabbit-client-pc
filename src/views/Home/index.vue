@@ -1,11 +1,12 @@
 <template>
-  <div>home</div>
+  <div class="home">首页</div>
 </template>
 
 <script>
 import { defineComponent, reactive, toRefs } from 'vue';
+
 export default defineComponent({
-  name: '',
+  name: 'Home',
   components: {},
   setup() {
     const data = reactive({});
@@ -15,4 +16,8 @@ export default defineComponent({
   }
 });
 </script>
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.home {
+  height: 360px;
+}
+</style>
