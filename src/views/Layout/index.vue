@@ -13,6 +13,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive, toRefs } from 'vue';
+import { useStore } from '@/store/index';
 import AppTopnav from '@/components/app-topnav.vue';
 import AppHeader from '@/components/app-header/index.vue';
 import AppFooter from '@/components/app-footer.vue';
@@ -20,10 +21,8 @@ export default defineComponent({
   name: 'Layout',
   components: { AppTopnav, AppHeader, AppFooter },
   setup() {
-    const data = reactive({});
-    return {
-      ...toRefs(data)
-    };
+    const store = useStore();
+    store.dispatch('getList', undefined);
   }
 });
 </script>

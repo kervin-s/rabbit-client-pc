@@ -32,7 +32,7 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "src/store/modules/cart.js"  ],
   "exclude": [
     "node_modules"
   ]
