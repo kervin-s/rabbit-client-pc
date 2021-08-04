@@ -1,11 +1,11 @@
 <template>
-  <div>'AppHeaderSticky'</div>
+  <div>轮播图</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'AppHeaderSticky',
+  name: 'HomeBanner',
   components: {},
   setup() {
     return {};

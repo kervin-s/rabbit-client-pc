@@ -1,19 +1,24 @@
 <template>
   <ul class="app-header-nav">
-    <li class="home"><RouterLink to="/">首页</RouterLink></li>
+    <li class="home">
+      <RouterLink to="/">首页</RouterLink>
+    </li>
     <li
       v-for="item in list"
       :key="item.id"
-      @mouseenter="show(item)"
-      @mouseleave="hide(item)"
+      @mouseenter="show(item.id)"
+      @mouseleave="hide(item.id)"
     >
-      <router-link @click="hide(item)" to="/">
+      <RouterLink @click="hide(item)" to="/">
         {{ item.name }}
-      </router-link>
-      <div>
+      </RouterLink>
+      <div class="layer" :class="{ open: item.open }">
         <ul>
-          <li v-for="subItem in item.children" :key="subItem.id">
-            <router-link to="/"> {{ subItem.name }}</router-link>
+          <li v-for="sub in item.children" :key="sub.id">
+            <RouterLink @click="hide(item)" to="/">
+              <img :src="sub.picture" alt="" />
+              <p>{{ sub.name }}</p>
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -22,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { useStore } from '@/store/index';
 export default defineComponent({
   name: 'AppHeaderNav',
@@ -37,11 +42,11 @@ export default defineComponent({
     // 1. vuex每个分类加上open数据
     // 2. vuex提供显示和隐藏函数，修改open数据
     // 3. 组件中使用vuex中的函数，使用时间来绑定，提供一个类名显示隐藏的类名
-    const show = (item: any) => {
-      store.commit('show', item.id);
+    const show = (id: string) => {
+      store.commit('show', id);
     };
-    const hide = (item: any) => {
-      store.commit('hide', item.id);
+    const hide = (id: string) => {
+      store.commit('hide', id);
     };
     return { list, show, hide };
   }
@@ -71,11 +76,11 @@ export default defineComponent({
         color: @xtxColor;
         border-bottom: 1px solid @xtxColor;
       }
-      // 显示二级类目
-      > .layer {
-        height: 132px;
-        opacity: 1;
-      }
+      // // 显示二级类目
+      // > .layer {
+      //   height: 132px;
+      //   opacity: 1;
+      // }
     }
   }
 }

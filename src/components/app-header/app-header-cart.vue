@@ -1,5 +1,9 @@
 <template>
-  <div><i class="iconfont icon-cart"></i></div>
+  <div class="cart">
+    <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-ts-cart" />
+    </svg>
+  </div>
 </template>
 
 <script lang="ts">
@@ -19,5 +23,9 @@ export default defineComponent({
   // 加下限制
   position: relative;
   z-index: 600;
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
 }
 </style>

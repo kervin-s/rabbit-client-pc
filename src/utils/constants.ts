@@ -1,9 +1,9 @@
 /*
- * @FilePath: \rabbit-client-pc\src\utils\constant.ts
+ * @FilePath: \rabbit-client-pc\src\utils\constants.ts
  * @Description: 静态常量枚举
  * @Author: kervin
  * @Date: 2021-08-02 15:55:06
- * @LastEditTime: 2021-08-02 15:59:52
+ * @LastEditTime: 2021-08-04 15:11:01
  * @LastEditors: kervin
  */
 export const topCategory: string[] = [

@@ -4,14 +4,12 @@ import {
   Module,
   Store as VuexStore,
   CommitOptions,
-  ActionTree,
   ActionContext,
   DispatchOptions
 } from 'vuex';
-import { topCategory } from '@/utils/constants';
 import { findAllCategory } from '@/api/category';
 import { RootState } from '../index';
-
+import { topCategory } from '@/utils/constants';
 /* 类型定义++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 export type CateChildrenType = {
   id?: string;
@@ -61,14 +59,14 @@ export type CategoryStoreT<S = CategoryState> = Omit<
 } & {
   dispatch<K extends keyof Actions>(
     key: K,
-    payload: Parameters<Actions[K]>[1],
+    payload?: Parameters<Actions[K]>[1],
     options?: DispatchOptions
   ): ReturnType<Actions[K]>;
 };
 /* store++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 const state = (): CategoryState => {
   return {
-    list: topCategory.map((item) => ({ name: item }))
+    list: [] // topCategory.map((item) => ({ name: item }))
   };
 };
 const mutations: MutationTree<CategoryState> & Mutations = {
