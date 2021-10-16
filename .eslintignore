@@ -1,0 +1,7 @@
+/node_modules
+/dist
+/src/assets/js
+/src/vender
+/package-lock.json
+/package.json
+.DS_Store
