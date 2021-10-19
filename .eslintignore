@@ -1,7 +1,9 @@
 /node_modules
 /dist
-/src/assets/js
+/src/assets
 /src/vender
 /package-lock.json
 /package.json
+/public
+/docs
 .DS_Store

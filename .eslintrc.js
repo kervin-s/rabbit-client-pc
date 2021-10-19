@@ -2,25 +2,21 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    node: true,
+    node: true
   },
   extends: [
     'plugin:vue/vue3-essential',
-    'airbnb-base',
+    'standard'
   ],
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   plugins: [
-    'vue',
+    'vue'
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    'prefer-const': 'off',
-  },
-};
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+  }
+}

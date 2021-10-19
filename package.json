@@ -4,13 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "lint-fix": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.23.0",
     "core-js": "^3.6.5",
+    "normalize.css": "^8.0.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vuex": "^4.0.0-0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -19,11 +23,13 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-vue": "^7.19.1",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2"
+    "less": "^4.1.2",
+    "less-loader": "^10.2.0"
   },
   "browserslist": [
     "> 1%",
