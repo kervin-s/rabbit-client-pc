@@ -18,7 +18,6 @@
 ## 配套资源
 我们学习配套
 
-- 接口文档   [API文档](./docs/api.html)
 - 参照案例  http://erabbit.itheima.net/#/   vue3.0
 
 ## 使用技术

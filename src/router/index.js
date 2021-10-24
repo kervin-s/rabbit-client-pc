@@ -1,6 +1,12 @@
+/*
+ * @Description:router
+ * @Author: kervin
+ * @Date: 2021-10-24 16:29:48
+ * @FilePath: \rabbit-client-pc\src\router\index.js
+ */
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Layout from '@/views/layout'
-import Home from '@/views/home'
+const Layout = () => import('@/views/Layout/index.vue')
+const Home = () => import('@/views/home/index.vue')
 
 const routes = [
   {
@@ -8,13 +14,15 @@ const routes = [
     name: 'Layout',
     component: Layout,
     children: [
-      { path: '/', component: Home },
+      /* 主页 */
       {
-        path: '/category/:id',
-        component: () => import('@/views/category')
-      }
-    ]
-  }
+        path: '/',
+        name: 'Home',
+        component: Home
+      }]
+  },
+  { path: '/login', component: () => import('@/views/login/index.vue') },
+  { path: '/login/callback', component: () => import('@/views/login/callback.vue') }
 
 ]
 

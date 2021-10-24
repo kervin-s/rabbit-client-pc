@@ -1,13 +1,12 @@
 <template>
-  <router-view/>
+  <RouterView />
 </template>
-
-<style lang="less">
+./components/app-header.vue
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 </style>
