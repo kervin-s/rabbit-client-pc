@@ -1,6 +1,6 @@
 <template>
   <div class="home">
- home
+main
   </div>
 </template>
 
@@ -20,5 +20,8 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style lang="less" scoped>
+.home{
+  height: 500px;
+}
 </style>
