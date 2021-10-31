@@ -1,7 +1,6 @@
 <template>
   <RouterView />
 </template>
-./components/app-header.vue
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
